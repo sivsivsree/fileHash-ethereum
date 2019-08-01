@@ -1,0 +1,27 @@
+{
+  "server": {
+    "PORT": 5050
+  },
+  "url": "https://etherscan.io/tx/",
+  "contractAddress": "0xbFAA609d0421C33584B71efd2e91BAC48b70fd7e",
+  "address": "0x592f72243453fC45109D302faF96640d00712C86",
+  "pk": "DE9B93ED488EA77E0CD9D4534EE0C4C6F4839492A51E056128A635D04803791A",
+  "basicAuth": {
+    "userName": "ETHTestNet_DEMO",
+    "password": "CYBOt@8435"
+  },
+  "access": {
+    "READ": 0,
+    "EDIT": 1,
+    "COPY": 2,
+    "SCREENSHOT": 3,
+    "WATERMARK": 4,
+    "SAVEAS": 5,
+    "0": "READ",
+    "1": "EDIT",
+    "2": "COPY",
+    "3": "SCREENSHOT",
+    "4": "WATERMARK",
+    "5": "SAVEAS"
+  }
+}
