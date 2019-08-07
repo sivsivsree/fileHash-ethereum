@@ -24,10 +24,10 @@ const invoke = async (functionName, arguments) => {
         switch (functionName) {
             case "createFile":
                 console.log("createFile tx")
-                gas = await certContract.methods.createFile(arguments[0], arguments[1], arguments[2], arguments[3]).estimateGas({from: config.address});
+                gas = await certContract.methods.createFile(arguments[0], arguments[1], arguments[2]).estimateGas({from: config.address});
                 console.log("gas price", gas);
 
-                payLoad = certContract.methods.createFile(arguments[0], arguments[1], arguments[2], arguments[3]).encodeABI();
+                payLoad = certContract.methods.createFile(arguments[0], arguments[1], arguments[2]).encodeABI();
                 transaction = await web3.eth.accounts.signTransaction({
                     to: certContract.options.address,
                     value: '0x00',
@@ -40,10 +40,10 @@ const invoke = async (functionName, arguments) => {
 
             case "updateFile":
                 console.log("updateFile ")
-                gas = await certContract.methods.updateFile(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]).estimateGas({from: config.address});
+                gas = await certContract.methods.updateFile(arguments[0], arguments[1], arguments[2], arguments[3]).estimateGas({from: config.address});
                 console.log("gas price", gas);
 
-                payLoad = certContract.methods.updateFile(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]).encodeABI();
+                payLoad = certContract.methods.updateFile(arguments[0], arguments[1], arguments[2], arguments[3]).encodeABI();
                 transaction = await web3.eth.accounts.signTransaction({
                     to: certContract.options.address,
                     value: '0x00',

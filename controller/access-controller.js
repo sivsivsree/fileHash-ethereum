@@ -123,11 +123,9 @@ const createFile1 = async (req, res) => {
             throw "createdBy is required";
         }
 
-        if (req.body._hash === null || req.body._hash === undefined || req.body._hash.trim().length === 0) {
-            throw "_hash is required";
-        }
 
-        let tx = await trans.invoke("createFile", [req.body._filename, req.body._createdAt, req.body._createdBy, req.body._hash]);
+
+        let tx = await trans.invoke("createFile", [req.body._filename, req.body._createdAt, req.body._createdBy]);
 
         res.send({
             success: true, data: {
@@ -163,11 +161,8 @@ const updateFile = async (req, res) => {
             throw "_updatedBy is required";
         }
 
-        if (req.body._hash === null || req.body._hash === undefined || req.body._hash.trim().length === 0) {
-            throw "_hash is required";
-        }
 
-        let tx = await trans.invoke("updateFile", [req.body._filename, req.body._createdBy, req.body._updatedAt, req.body._updatedBy, req.body._hash]);
+        let tx = await trans.invoke("updateFile", [req.body._filename, req.body._createdBy, req.body._updatedAt, req.body._updatedBy]);
 
         res.send({
             success: true, data: {
@@ -183,38 +178,11 @@ const updateFile = async (req, res) => {
 };
 
 
-const isFileValid = async (req, res) => {
-    const methodName = "[isFileValid] : "+ JSON.stringify(req.body);
-    console.log(methodName);
-    try {
-        if (req.body._filename === null || req.body._filename === undefined || req.body._filename.trim().length === 0) {
-            throw "filename is required";
-        }
 
-        if (req.body._createdBy === null || req.body._createdBy === undefined || req.body._createdBy.trim().length === 0) {
-            throw "createdBy is required";
-        }
-
-        if (req.body._hash === null || req.body._hash === undefined || req.body._hash.trim().length === 0) {
-            throw "_hash is required";
-        }
-
-        let output = await trans.query("isFileValid", [req.body._filename, req.body._createdBy, req.body._hash]);
-
-        res.send({
-            success: true, file: output.access ? "VALID" : "NOT VALID"
-        });
-
-    } catch (e) {
-        res.send({success: false, error: e});
-    }
-
-};
 
 module.exports = {
     access: access,
     getAccess: getAccess,
     createFile1: createFile1,
-    updateFile: updateFile,
-    isFileValid: isFileValid
+    updateFile: updateFile
 };

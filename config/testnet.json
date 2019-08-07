@@ -3,7 +3,7 @@
     "PORT": 5050
   },
   "url": "https://rinkeby.etherscan.io/tx/",
-  "contractAddress": "0xbFAA609d0421C33584B71efd2e91BAC48b70fd7e",
+  "contractAddress": "0x4E6079482d4FAbe7780ac0E4A5db4de332601c30",
   "address": "0x592f72243453fC45109D302faF96640d00712C86",
   "pk": "DE9B93ED488EA77E0CD9D4534EE0C4C6F4839492A51E056128A635D04803791A",
   "basicAuth": {

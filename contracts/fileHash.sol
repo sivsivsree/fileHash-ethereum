@@ -3,12 +3,13 @@ pragma solidity 0.5.1;
 
 contract FileHash {
 
+    event notifyFileChange(string filename, string  createdBy, string updatedAt,string updatedBy);
+
     address owner;
 
     struct fileInfo {
         bool isExist;
         string filename;
-        string hash;
         string createdAt;
         string updatedAt;
         string createdBy;
@@ -62,12 +63,11 @@ contract FileHash {
     }
 
 
-    function createFile(string memory _filename, string memory _createdAt, string memory _createdBy, string memory _hash) public onlyOwner returns (bool) {
+    function createFile(string memory _filename, string memory _createdAt, string memory _createdBy) public onlyOwner returns (bool) {
         require(!userFiles[_createdBy][_filename].isExist, "Filename already Exist for the user");
 
         userFiles[_createdBy][_filename].isExist = true;
         userFiles[_createdBy][_filename].filename = _filename;
-        userFiles[_createdBy][_filename].hash = _hash;
         userFiles[_createdBy][_filename].createdAt = _createdAt;
         userFiles[_createdBy][_filename].updatedAt = _createdAt;
         userFiles[_createdBy][_filename].createdBy = _createdBy;
@@ -84,27 +84,23 @@ contract FileHash {
     }
 
     function updateFile(string memory _filename, string memory _createdBy, string memory _updatedAt,
-        string memory _updatedBy, string memory _hash) public onlyOwner returns (bool) {
+        string memory _updatedBy) public onlyOwner returns (bool) {
 
         require(userFiles[_createdBy][_filename].isExist, "File do not exist");
         require(userFiles[_createdBy][_filename].userAccess[_updatedBy]['EDIT'], "Do not have edit access");
-
-        userFiles[_createdBy][_filename].hash = _hash;
 
         userFiles[_createdBy][_filename].updatedAt = _updatedAt;
 
         userFiles[_createdBy][_filename].updatedBy = _updatedBy;
 
+        emit notifyFileChange(_filename,_createdBy,_updatedAt,_updatedBy);
+
         return true;
     }
 
-    function isFileValid(string memory _filename, string memory _createdBy, string memory _hash) public view returns (bool isValid_) {
-        if (keccak256(abi.encodePacked(_hash)) == keccak256(abi.encodePacked(userFiles[_createdBy][_filename].hash))) {
-            isValid_ = true;
-        } else {
-            isValid_ = false;
-        }
-    }
+
+
+
 
 
 }
