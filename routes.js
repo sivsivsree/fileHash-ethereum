@@ -9,6 +9,7 @@ router.route('/access').post(accessController.access);
 router.route('/getAccess').post(accessController.getAccess);
 router.route('/createFile').post(accessController.createFile1);
 router.route('/updateFile').post(accessController.updateFile);
+router.route('/updateInfo').post(accessController.updateInfo);
 
 module.exports = {
     router: router
